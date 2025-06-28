@@ -1,72 +1,45 @@
-<template>
-  <ion-page>
-    <ion-header>
-      <ion-toolbar color="primary">
-        <ion-title>Mi Perfil</ion-title>
-      </ion-toolbar>
-    </ion-header>
-
-    <ion-content class="ion-padding">
-      <div class="profile-header">
-        <img class="avatar" src="https://i.pravatar.cc/150?img=3" alt="User Avatar" />
-        <h2>{{ username }}</h2>
-        <p class="email">{{ email }}</p>
-      </div>
-
-      <ion-list>
-        <ion-item button @click="goToSettings">
-          <ion-label>Configuración</ion-label>
-        </ion-item>
-        <ion-item button @click="goToHelp">
-          <ion-label>Ayuda</ion-label>
-        </ion-item>
-        <ion-item button color="danger" @click="logout">
-          <ion-label>Cerrar sesión</ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-page>
-</template>
-
-<script setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel } from '@ionic/vue';
-
-const username = ref('Marc Expiry Eyes');
-const email = ref('marc@expiryeyes.com');
-const router = useRouter();
-
-function logout() {
-  alert('Sesión cerrada');
-  router.push('/login');
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "1234",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "cliente1",
+      "password": "abcd",
+      "role": "user"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Yogur Natural",
+      "originalPrice": 1.20,
+      "discountedPrice": 0.50,
+      "expiryDate": "2025-06-30T23:59:59Z",
+      "supermarket": "Mercadona Girona Carrer Barcelona",
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": "Pan de molde",
+      "originalPrice": 1.50,
+      "discountedPrice": 0.60,
+      "expiryDate": "2025-06-29T23:59:59Z",
+      "supermarket": "Mercadona Girona Pont Major",
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "Leche entera",
+      "originalPrice": 0.90,
+      "discountedPrice": 0.40,
+      "expiryDate": "2025-06-28T23:59:59Z",
+      "supermarket": "Mercadona Salt",
+      "available": true
+    }
+  ]
 }
-
-function goToSettings() {
-  alert('Ir a configuración (pendiente)');
-}
-
-function goToHelp() {
-  alert('Ir a ayuda (pendiente)');
-}
-</script>
-
-<style scoped>
-.profile-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin: 10px auto;
-  display: block;
-}
-
-.email {
-  color: gray;
-  font-size: 14px;
-}
-</style>

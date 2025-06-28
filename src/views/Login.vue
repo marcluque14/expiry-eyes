@@ -47,7 +47,7 @@ async function login() {
     );
     if (res.data.length > 0) {
       alert('Login correcto');
-      router.push('/tabs/home');
+      router.push('/tabs/Home');
     } else {
       alert('Usuario o contraseña incorrectos');
     }
@@ -70,17 +70,23 @@ async function login() {
   
   .logo {
     width: 120px;
-    margin-bottom: 40px;
+    margin-bottom: 20px; /* reduced from 40px to move logo higher */
+    margin-top: -20px; /* added to push logo upwards on screen */
   }
   
   ion-item {
     --border-radius: 10px;
     --box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    margin-bottom: 16px;
+    margin-bottom: 24px; /* increased from 16px for more spacing */
   }
   
+  ion-label {
+    margin-bottom: 4px;
+  }
+
   ion-input {
     font-size: 16px;
+    padding-top: 10px;
   }
   
   .login-button {

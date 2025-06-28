@@ -18,11 +18,16 @@ const routes = [
     path: '/tabs/',
     component: TabsPage,
     children: [
+      { path: '', redirect: '/tabs/home' },
       { path: 'home', component: Home },
-      { path: 'map', component: MapView },
+      { path: 'MapView', component: MapView },
       { path: 'profile', component: Profile }
     ]
   },
+  {
+    path: '/ofertas',
+    component: () => import('../views/Ofertas.vue')
+  }
 ];
 
 const router = createRouter({
