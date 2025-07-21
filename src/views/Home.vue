@@ -2,6 +2,23 @@
   <ion-page>
 
     <ion-content class="ion-padding" :fullscreen="true">
+      <div v-if="showSalleMenu" class="salle-alert">
+        <div class="salle-alert-content" style="position: relative;">
+          <button @click="showSalleMenu = false" style="position: absolute; top: 8px; right: 8px; background: transparent; border: none; font-size: 20px;">×</button>
+          <p><strong>Espaguetis por solo 2.5 €</strong></p>
+          <img src="../assets/Espaguetis.jpg" alt="Espaguetis" />
+          <ion-button expand="block" color="warning" @click="openSalleLocation" style="margin-top: 10px;">
+            Click aquí para ir a la ubicación
+          </ion-button>
+        </div>
+      </div>
+      <div v-if="showSchoolNotice" class="school-notice">
+        <div class="school-notice-content">
+          <ion-icon :icon="close" class="close-icon" @click="dismissSchoolNotice"></ion-icon>
+          <p><strong>Novedades:</strong> ¡Ahora también trabajamos con <u>Escuelas</u>!</p>
+          <img src="../assets/Comedor.jpg" alt="Comedor" style="width: 100%; border-radius: 8px;" />
+        </div>
+      </div>
       <div class="search-bar-container">
         <ion-searchbar placeholder="Search"></ion-searchbar>
       </div>
@@ -35,6 +52,33 @@
           <h2>Descubre ofertas</h2>
           <p>Primer mes con envío gratuito</p>
         </div>
+      </div>
+
+      <div class="school-cards-section">
+        <h4 class="section-subtitle">¡También en Escuelas!</h4>
+        <div class="school-card-list">
+          <div class="school-card" @click="showLaSallePopup">
+            <img src="../assets/Salle.png" alt="La Salle" />
+            <p>La Salle</p>
+          </div>
+          <div class="school-card" @click="mostrarBresol">
+            <img src="@/assets/Bresol.avif" />
+            <p>Bresol</p>
+          </div>
+        </div>
+      </div>
+      <div
+        v-if="showPopupLaSalle"
+        class="popup"
+        style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+               background-color: white; border-radius: 20px; padding: 20px; width: 80%;
+               box-shadow: 0px 4px 16px rgba(0,0,0,0.3); z-index: 1000; text-align: center;">
+        <button @click="showPopupLaSalle = false"
+          style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 20px;">✖</button>
+        <h2>Espaguetis por solo 2.5 €</h2>
+        <img src="@/assets/Espaguetis.jpg" alt="Espaguetis" style="width: 100%; border-radius: 12px; margin-top: 10px;" />
+        <IonButton expand="block" color="success" class="ion-margin-top"
+          @click="openMapsLaSalle()">Ir a buscarlo</IonButton>
       </div>
 
       <div class="supermarkets">
@@ -111,6 +155,27 @@
           </div>
         </div>
       </div>
+      <div v-if="showBresolPopup" class="popup-overlay">
+        <div class="popup-content">
+          <!-- Ion Header for Bresol popup -->
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-back-button defaultHref="/home"></ion-back-button>
+              </ion-buttons>
+              <ion-title class="ion-text-center">
+                Canalones con bechamel
+              </ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <button class="close-button" @click="cerrarPopupBresol">✖</button>
+          <img src="@/assets/Canalones.jpeg" alt="Canalones" class="popup-img" />
+          <p><strong>Precio:</strong> 3,90 €</p>
+          <ion-button @click="$router.push('/product-details')">
+            Ir a buscarlo
+          </ion-button>
+        </div>
+      </div>
     </ion-content>
   </ion-page>
 </template>
@@ -118,8 +183,22 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonList, IonItem, IonLabel, IonSearchbar, IonButton, IonIcon } from '@ionic/vue';
-import { heart, refresh, personCircleOutline } from 'ionicons/icons';
+import {
+  IonPage,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonContent,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonSearchbar,
+  IonButton,
+  IonIcon,
+  IonBackButton,
+  IonButtons
+} from '@ionic/vue';
+import { heart, refresh, personCircleOutline, close } from 'ionicons/icons';
 
 import mercadonaLogo from '../assets/mercadona.png';
 import carrefourLogo from '../assets/carrefour.png';
@@ -136,6 +215,11 @@ const supermarkets = [
 const username = ref('Marc Expiry Eyes');
 const email = ref('marc@expiryeyes.com');
 const router = useRouter();
+
+const showSchoolNotice = ref(true);
+function dismissSchoolNotice() {
+  showSchoolNotice.value = false;
+}
 
 function logout() {
   alert('Sesión cerrada');
@@ -164,6 +248,35 @@ function goToSpecialOffer() {
 
 function goToOfertas() {
   router.push('/ofertas');
+}
+
+function goToColegios() {
+  router.push('/colegios');
+}
+
+const showSalleMenu = ref(false);
+
+const showPopupLaSalle = ref(false);
+const showLaSallePopup = () => {
+  showPopupLaSalle.value = true;
+};
+const openMapsLaSalle = () => {
+  window.open("https://www.google.com/maps?q=Carrer+de+Sant+Joan+Bta.+la+Salle,+12,+17002+Girona", "_blank");
+}
+
+const showBresolPopup = ref(false);
+
+function mostrarBresol() {
+  showBresolPopup.value = true;
+}
+
+function cerrarPopupBresol() {
+  showBresolPopup.value = false;
+}
+
+const refreshHome = () => {
+  router.replace('/tabs/home')
+  window.location.reload()
 }
 </script>
 
@@ -437,4 +550,173 @@ ion-slides {
   margin: 0 auto 10px auto;
   display: block;
 }
+
+.school-notice {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 24px;
+  width: 80%;
+  max-width: 400px;
+  border-left: 6px solid #f59e0b;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+.school-notice-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.school-notice-content p {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+.close-icon {
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.school-cards-section {
+  margin-top: 30px;
+  padding: 10px;
+  text-align: left;
+}
+
+.school-card-list {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.school-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  text-align: center;
+  width: 45%;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+
+.school-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.school-card p {
+  margin: 8px 0;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.salle-menu {
+  margin: 20px 10px;
+}
+
+.salle-alert {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fef3c7;
+  color: #92400e;
+  padding: 16px;
+  width: 300px;
+  border-left: 6px solid #f59e0b;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+
+.salle-alert-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.salle-alert-content p {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.salle-alert-content img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.salle-close-icon {
+  font-size: 20px;
+  cursor: pointer;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+}
+
+.popup-img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.close-btn {
+  /* deprecated, replaced by .close-button */
+  display: none;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
 </style>
+
+const showBresol = ref(false);
+// Dummy handler for Salle popup location button to prevent error if not present
+function openSalleLocation() {
+  window.open("https://www.google.com/maps?q=Carrer+de+Sant+Joan+Bta.+la+Salle,+12,+17002+Girona", "_blank");
+}
