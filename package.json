@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
+    "json-server": "json-server --watch db.json --port 3000",
+    "run:app": "concurrently \"npm run json-server\" \"npm run dev\"",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
     "lint": "eslint ."
@@ -36,6 +38,7 @@
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/eslint-config-typescript": "^12.0.0",
     "@vue/test-utils": "^2.3.0",
+    "concurrently": "^9.2.0",
     "cypress": "^13.5.0",
     "eslint": "^8.35.0",
     "eslint-plugin-vue": "^9.9.0",

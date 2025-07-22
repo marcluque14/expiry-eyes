@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import TabsPage from '../views/TabsPage.vue';
-import Home from '../views/Home.vue';
-import MapView from '../views/MapView.vue';
-import Profile from '../views/Profile.vue';
 import Login from '../views/Login.vue';
 import HomeEmpresa from '../views/HomeEmpresa.vue';
 
@@ -24,9 +21,11 @@ const routes = [
     component: TabsPage,
     children: [
       { path: '', redirect: '/tabs/home' },
-      { path: 'home', component: Home },
-      { path: 'MapView', component: MapView },
-      { path: 'profile', component: Profile }
+      { path: 'home', component: () => import('../views/Home.vue') },
+      { path: 'MapView', component: () => import('../views/MapView.vue') },
+      { path: 'profile', component: () => import('../views/Profile.vue') },
+      { path: 'cart', component: () => import('../views/Cart.vue') },
+      { path: 'notifications', component: () => import('../views/Notifications.vue') }
     ]
   },
   {

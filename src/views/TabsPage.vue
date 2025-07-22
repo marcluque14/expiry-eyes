@@ -13,7 +13,7 @@
         </ion-tab-button>
         <ion-tab-button tab="cart" href="/tabs/cart">
           <ion-icon :icon="cartOutline"></ion-icon>
-          <ion-label>Cart</ion-label>
+          <ion-label>Cesta</ion-label>
         </ion-tab-button>
         <ion-tab-button tab="notifications" href="/tabs/notifications">
           <ion-icon :icon="notificationsOutline"></ion-icon>
