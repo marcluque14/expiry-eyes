@@ -22,6 +22,7 @@
     "@capacitor/status-bar": "7.0.1",
     "@ionic/vue": "^8.6.2",
     "@ionic/vue-router": "^8.6.2",
+    "@react-oauth/google": "^0.12.2",
     "axios": "^1.10.0",
     "ionicons": "^7.4.0",
     "leaflet": "^1.9.4",

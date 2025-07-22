@@ -4,6 +4,7 @@ import Home from '../views/Home.vue';
 import MapView from '../views/MapView.vue';
 import Profile from '../views/Profile.vue';
 import Login from '../views/Login.vue';
+import HomeEmpresa from '../views/HomeEmpresa.vue';
 
 const routes = [
   {
@@ -13,6 +14,10 @@ const routes = [
   {
     path: '/login',
     component: Login,
+  },
+  {
+    path: '/home-empresa',
+    component: HomeEmpresa,
   },
   {
     path: '/tabs/',
