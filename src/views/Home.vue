@@ -19,6 +19,11 @@
           <img src="../assets/Comedor.jpg" alt="Comedor" style="width: 100%; border-radius: 8px;" />
         </div>
       </div>
+      <div class="logout-button-container" style="text-align: right; margin-bottom: 10px;">
+        <ion-button color="danger" size="small" @click="logout">
+          Logout
+        </ion-button>
+      </div>
       <div class="search-bar-container">
         <ion-searchbar placeholder="Search"></ion-searchbar>
       </div>
@@ -222,7 +227,7 @@ function dismissSchoolNotice() {
 }
 
 function logout() {
-  alert('Sesión cerrada');
+  localStorage.removeItem('expiry-eyes-token');
   router.push('/login');
 }
 

@@ -21,6 +21,9 @@ const routes = [
     component: TabsPage,
     children: [
       { path: '', redirect: '/tabs/home' },
+      { path: 'home', component: Home },
+      { path: 'mapview', component: MapView },
+      { path: 'profile', component: Profile }
       { path: 'home', component: () => import('../views/Home.vue') },
       { path: 'MapView', component: () => import('../views/MapView.vue') },
       { path: 'profile', component: () => import('../views/Profile.vue') },
@@ -36,6 +39,10 @@ const routes = [
     path: '/product-details',
     name: 'ProductDetails',
     component: () => import('@/views/ProductDetails.vue')
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/login'
   }
 ];
 
