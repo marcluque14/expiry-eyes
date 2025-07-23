@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import TabsPage from '../views/TabsPage.vue';
+import Home from '../views/Home.vue';
+import MapView from '../views/MapView.vue';
+import Profile from '../views/Profile.vue';
 import Login from '../views/Login.vue';
 import HomeEmpresa from '../views/HomeEmpresa.vue';
 
@@ -24,11 +27,6 @@ const routes = [
       { path: 'home', component: Home },
       { path: 'mapview', component: MapView },
       { path: 'profile', component: Profile }
-      { path: 'home', component: () => import('../views/Home.vue') },
-      { path: 'MapView', component: () => import('../views/MapView.vue') },
-      { path: 'profile', component: () => import('../views/Profile.vue') },
-      { path: 'cart', component: () => import('../views/Cart.vue') },
-      { path: 'notifications', component: () => import('../views/Notifications.vue') }
     ]
   },
   {
@@ -49,6 +47,20 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  console.log('Navegando a:', to.path);
+  const publicPages = ['/login'];
+  const authRequired = !publicPages.includes(to.path);
+  const token = localStorage.getItem('expiry-eyes-token');
+  const loggedIn = token && token.length > 10;  // Token no vacío y razonablemente largo
+  console.log('Autenticación requerida:', authRequired, 'Usuario logueado:', loggedIn);
+
+  if (authRequired && !loggedIn) {
+    return next('/login');
+  }
+  next();
 });
 
 export default router;
