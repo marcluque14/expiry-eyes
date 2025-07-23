@@ -26,7 +26,9 @@ const routes = [
       { path: '', redirect: '/tabs/home' },
       { path: 'home', component: Home },
       { path: 'mapview', component: MapView },
-      { path: 'profile', component: Profile }
+      { path: 'profile', component: Profile },
+      { path: 'notifications', component: () => import('@/views/Notifications.vue') },
+      { path: 'cart', component: () => import('@/views/Cart.vue') }
     ]
   },
   {
