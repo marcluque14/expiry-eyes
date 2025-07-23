@@ -19,10 +19,8 @@
           <img src="../assets/Comedor.jpg" alt="Comedor" style="width: 100%; border-radius: 8px;" />
         </div>
       </div>
-      <div class="logout-button-container" style="text-align: right; margin-bottom: 10px;">
-        <ion-button color="danger" size="small" @click="logout">
-          Logout
-        </ion-button>
+      <div class="logout-icon-container" style="text-align: right; margin: 50px 10px 25px 0;">
+        <ion-icon :icon="logOut" @click="logout" style="font-size: 24px; cursor: pointer; color: red;"></ion-icon>
       </div>
       <div class="search-bar-container">
         <ion-searchbar placeholder="Search"></ion-searchbar>
@@ -204,6 +202,7 @@ import {
   IonButtons
 } from '@ionic/vue';
 import { heart, refresh, personCircleOutline, close } from 'ionicons/icons';
+import { logOut as logoutIcon } from 'ionicons/icons';
 
 import mercadonaLogo from '../assets/mercadona.png';
 import carrefourLogo from '../assets/carrefour.png';
@@ -225,6 +224,8 @@ const showSchoolNotice = ref(true);
 function dismissSchoolNotice() {
   showSchoolNotice.value = false;
 }
+
+const logOut = logoutIcon;
 
 function logout() {
   localStorage.removeItem('expiry-eyes-token');

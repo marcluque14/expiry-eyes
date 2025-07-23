@@ -104,9 +104,12 @@
     return localStorage.getItem('expiry-eyes-token');
   }
   
-  async function redirectAccordingToRole() {
-    // Sin roles, vamos directo a home
-    await router.push('/tabs/home');
+  async function redirectAccordingToRole(email: string) {
+    if (email === 'marc12@gmail.com') {
+      await router.push('/home-empresa');
+    } else {
+      await router.push('/tabs/home');
+    }
   }
   
   async function login() {
@@ -124,8 +127,8 @@
           headers: { Authorization: `Bearer ${res.data.authToken}` }
         });
   
-        if (userRes.data) {  // Cambiado aquí: se comprueba res.data directamente
-          await redirectAccordingToRole();
+        if (userRes.data && userRes.data.email) {
+          await redirectAccordingToRole(userRes.data.email);
         } else {
           alert('No se pudo obtener información de usuario');
         }
@@ -159,7 +162,7 @@
         registerUsername.value = '';
         registerEmail.value = '';
         registerPassword.value = '';
-        await redirectAccordingToRole();
+        await redirectAccordingToRole(registerEmail.value);
       } else {
         alert('Error al registrar usuario');
       }
@@ -183,8 +186,8 @@
         const res = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
           headers: { Authorization: `Bearer ${token}` }
         });
-        if (res.data) { // Cambiado aquí también
-          await redirectAccordingToRole();
+        if (res.data && res.data.email) {
+          await redirectAccordingToRole(res.data.email);
         } else {
           localStorage.removeItem('expiry-eyes-token');
         }
