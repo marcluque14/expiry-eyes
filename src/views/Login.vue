@@ -224,11 +224,16 @@
   
   ion-label {
     margin-bottom: 4px;
+    z-index: 1;
+    position: relative;
+    color: black; /* Ensure label text is visible */
   }
-  
+
   ion-input {
     font-size: 16px;
     padding-top: 10px;
+    color: black; /* Ensure text is visible */
+    background-color: transparent; /* Make sure background does not cover label */
   }
   
   .login-button {
