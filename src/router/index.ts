@@ -28,7 +28,9 @@ const routes = [
       { path: 'mapview', component: MapView },
       { path: 'profile', component: Profile },
       { path: 'notifications', component: () => import('@/views/Notifications.vue') },
-      { path: 'cart', component: () => import('@/views/Cart.vue') }
+      { path: 'cart', component: () => import('@/views/Cart.vue') },
+      // Aquí añades la ruta nueva:
+      { path: 'payment-methods', component: () => import('@/views/PaymentMethods.vue') }
     ]
   },
   {
@@ -51,17 +53,20 @@ const router = createRouter({
   routes,
 });
 
+// Guardia para controlar rutas privadas
 router.beforeEach((to, from, next) => {
-  console.log('Navegando a:', to.path);
   const publicPages = ['/login'];
-  const authRequired = !publicPages.includes(to.path);
+  // También aceptar rutas públicas que empiecen por /login (ejemplo: /login/otra)
+  const isPublic = publicPages.some(page => to.path.startsWith(page));
+  
   const token = localStorage.getItem('expiry-eyes-token');
-  const loggedIn = token && token.length > 10;  // Token no vacío y razonablemente largo
-  console.log('Autenticación requerida:', authRequired, 'Usuario logueado:', loggedIn);
+  const loggedIn = token && token.length > 10;
 
-  if (authRequired && !loggedIn) {
+  if (!isPublic && !loggedIn) {
+    // Si no estás logueado y la ruta no es pública, redirige a login
     return next('/login');
   }
+
   next();
 });
 
