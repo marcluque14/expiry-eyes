@@ -104,8 +104,8 @@
     return localStorage.getItem('expiry-eyes-token');
   }
   
-  async function redirectAccordingToRole(email: string) {
-    if (email === 'marc12@gmail.com') {
+  async function redirectAccordingToRole(role: string) {
+    if (role === 'empresa') {
       await router.push('/home-empresa');
     } else {
       await router.push('/tabs/home');
@@ -128,7 +128,7 @@
         });
   
         if (userRes.data && userRes.data.email) {
-          await redirectAccordingToRole(userRes.data.email);
+          await redirectAccordingToRole(userRes.data.role);
         } else {
           alert('No se pudo obtener información de usuario');
         }
@@ -162,7 +162,11 @@
         registerUsername.value = '';
         registerEmail.value = '';
         registerPassword.value = '';
-        await redirectAccordingToRole(registerEmail.value);
+        const meRes = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
+          headers: { Authorization: `Bearer ${res.data.token || res.data.authToken}` }
+        });
+
+        await redirectAccordingToRole(meRes.data.role);
       } else {
         alert('Error al registrar usuario');
       }
@@ -187,7 +191,7 @@
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.data && res.data.email) {
-          await redirectAccordingToRole(res.data.email);
+          await redirectAccordingToRole(res.data.role);
         } else {
           localStorage.removeItem('expiry-eyes-token');
         }

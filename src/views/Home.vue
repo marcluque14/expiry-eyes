@@ -68,6 +68,10 @@
             <img src="@/assets/Bresol.avif" />
             <p>Bresol</p>
           </div>
+          <div class="school-card" @click="router.push('/colegio/Jaume Vicens Vives')">
+            <img src="@/assets/JaumeVicensVives.png" alt="Jaume Vicens Vives" />
+            <p>Jaume Vicens Vives</p>
+          </div>
         </div>
       </div>
       <div

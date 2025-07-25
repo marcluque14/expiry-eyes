@@ -34,6 +34,11 @@ const routes = [
     ]
   },
   {
+    path: '/colegio/:colegio',
+    name: 'SchoolProducts',
+    component: () => import('@/views/SchoolProducts.vue')
+  },
+  {
     path: '/ofertas',
     component: () => import('../views/Ofertas.vue')
   },
