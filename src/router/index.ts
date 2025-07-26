@@ -5,6 +5,7 @@ import MapView from '../views/MapView.vue';
 import Profile from '../views/Profile.vue';
 import Login from '../views/Login.vue';
 import HomeEmpresa from '../views/HomeEmpresa.vue';
+import Signup from '../views/Signup.vue';
 
 const routes = [
   {
@@ -14,6 +15,19 @@ const routes = [
   {
     path: '/login',
     component: Login,
+  },
+  {
+    path: '/oauth/google/callback',
+    name: 'GoogleCallback',
+    component: () => import('@/views/GoogleCallback.vue'),
+  },
+  {
+    path: '/signup',
+    component: Signup,
+  },
+  {
+    path: '/oauth/callback',
+    component: () => import('@/views/OAuthCallback.vue')
   },
   {
     path: '/home-empresa',
@@ -29,7 +43,6 @@ const routes = [
       { path: 'profile', component: Profile },
       { path: 'notifications', component: () => import('@/views/Notifications.vue') },
       { path: 'cart', component: () => import('@/views/Cart.vue') },
-      // Aquí añades la ruta nueva:
       { path: 'payment-methods', component: () => import('@/views/PaymentMethods.vue') }
     ]
   },
@@ -60,18 +73,13 @@ const router = createRouter({
 
 // Guardia para controlar rutas privadas
 router.beforeEach((to, from, next) => {
-  const publicPages = ['/login'];
-  // También aceptar rutas públicas que empiecen por /login (ejemplo: /login/otra)
-  const isPublic = publicPages.some(page => to.path.startsWith(page));
-  
-  const token = localStorage.getItem('expiry-eyes-token');
-  const loggedIn = token && token.length > 10;
+  const publicPages = ['/login', '/signup', '/oauth/google/callback'];
+  const authRequired = !publicPages.includes(to.path);
+  const loggedIn = !!localStorage.getItem('expiry-eyes-token');
 
-  if (!isPublic && !loggedIn) {
-    // Si no estás logueado y la ruta no es pública, redirige a login
+  if (authRequired && !loggedIn) {
     return next('/login');
   }
-
   next();
 });
 
