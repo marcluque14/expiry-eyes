@@ -18,7 +18,7 @@
               class="discount-badge"
             >{{ discount }}% OFF</ion-badge>
             <div class="buttons">
-              <ion-button size="small" fill="outline" class="detail-btn">Detalles</ion-button>
+              <ion-button size="small" fill="outline" class="detail-btn" @click="verDetalles">Detalles</ion-button>
               <ion-button size="small" class="reserve-btn">Reservar</ion-button>
             </div>
           </ion-col>
@@ -29,7 +29,15 @@
 </template>
 
 <script setup>
-defineProps({
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const props = defineProps({
+  id: {
+    type: [String, Number],
+    required: true
+  },
   name: String,
   expires: String,
   price: [String, Number],
@@ -40,6 +48,9 @@ defineProps({
   gramos: String
 })
 
+function verDetalles() {
+  router.push(`/producto/${props.id}`)
+}
 </script>
 
 <style scoped>

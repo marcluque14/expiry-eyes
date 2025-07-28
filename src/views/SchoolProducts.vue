@@ -15,6 +15,7 @@
       <ProductCard
         v-for="product in products"
         :key="product.id"
+        :id="product.id"
         :logo="product.logo || ''"
         :name="product.NombreProducto"
         :expires="product.FechaCreacion"
