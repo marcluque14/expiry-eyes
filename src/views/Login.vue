@@ -148,12 +148,13 @@
   
       if (res.data && res.data.authToken) {
         saveSession(res.data.authToken);
-  
+
         const userRes = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
           headers: { Authorization: `Bearer ${res.data.authToken}` }
         });
-  
+
         if (userRes.data && userRes.data.email) {
+          localStorage.setItem('user_id', userRes.data.id);
           await redirectAccordingToRole(userRes.data.role);
         } else {
           alert('No s\'ha pogut obtenir la informació de l\'usuari');
@@ -180,7 +181,7 @@
         email: registerEmail.value,
         password: registerPassword.value,
       });
-  
+
       if (res.data && (res.data.token || res.data.authToken)) {
         saveSession(res.data.token || res.data.authToken);
         alert('Usuari registrat amb èxit');
@@ -188,11 +189,13 @@
         registerUsername.value = '';
         registerEmail.value = '';
         registerPassword.value = '';
-  
+
         const meRes = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
           headers: { Authorization: `Bearer ${res.data.token || res.data.authToken}` }
         });
-  
+        // Guarda el user_id al localStorage just després d'obtenir meRes
+        localStorage.setItem('user_id', meRes.data.id);
+
         await redirectAccordingToRole(meRes.data.role);
       } else {
         alert('Error en registrar usuari');
@@ -236,22 +239,24 @@
   
   onMounted(async () => {
     const token = getSession();
-    if (token) {
-      isLoading.value = true;
-      try {
-        const res = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        if (res.data && res.data.email) {
-          await redirectAccordingToRole(res.data.role);
-        } else {
-          localStorage.removeItem('expiry-eyes-token');
-        }
-      } catch {
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+    isLoading.value = true;
+    try {
+      const res = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.data && res.data.email) {
+        await redirectAccordingToRole(res.data.role);
+      } else {
         localStorage.removeItem('expiry-eyes-token');
-      } finally {
-        isLoading.value = false;
       }
+    } catch {
+      localStorage.removeItem('expiry-eyes-token');
+    } finally {
+      isLoading.value = false;
     }
   });
   </script>

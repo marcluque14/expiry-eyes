@@ -18,12 +18,16 @@ import {
   IonSpinner,
   IonButtons,
 } from '@ionic/vue';
+import { IonBackButton } from '@ionic/vue';
 
 import '@ionic/vue/css/core.css';
 import '@ionic/vue/css/normalize.css';
 import '@ionic/vue/css/structure.css';
 import '@ionic/vue/css/typography.css';
 import './theme/variables.css';
+
+
+
 
 const app = createApp(App)
   .use(IonicVue)
@@ -43,6 +47,7 @@ app.component('IonButton', IonButton);
 app.component('IonModal', IonModal);
 app.component('IonSpinner', IonSpinner);
 app.component('IonButtons', IonButtons);
+app.component('IonBackButton', IonBackButton);
 
 router.isReady().then(() => {
   app.mount('#app');

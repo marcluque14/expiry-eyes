@@ -6,6 +6,7 @@ import Profile from '../views/Profile.vue';
 import Login from '../views/Login.vue';
 import HomeEmpresa from '../views/HomeEmpresa.vue';
 import Signup from '../views/Signup.vue';
+import EditProfile from '../views/EditProfile.vue';
 
 const routes = [
   {
@@ -24,6 +25,15 @@ const routes = [
   {
     path: '/signup',
     component: Signup,
+  },
+  {
+    path: '/editprofile',
+    component: EditProfile
+  },
+  {
+    path: '/editprofile/:id',
+    name: 'EditProfile',
+    component: () => import('@/views/EditProfile.vue')
   },
   {
     path: '/oauth/callback',
@@ -76,11 +86,15 @@ router.beforeEach((to, from, next) => {
   const publicPages = ['/login', '/signup', '/oauth/google/callback'];
   const authRequired = !publicPages.includes(to.path);
   const loggedIn = !!localStorage.getItem('expiry-eyes-token');
+  const user = loggedIn; // Assuming loggedIn indicates user presence
 
-  if (authRequired && !loggedIn) {
+  if (to.meta.requiresAuth && !user && to.path !== '/editprofile') {
+    next('/login');
+  } else if (authRequired && !loggedIn) {
     return next('/login');
+  } else {
+    next();
   }
-  next();
 });
 
 export default router;

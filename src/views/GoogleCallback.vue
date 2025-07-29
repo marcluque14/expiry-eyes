@@ -33,6 +33,18 @@ onMounted(async () => {
     // Corregimos aquí para que cheque 'token' (no authToken)
     if (res.data && res.data.token) {
       localStorage.setItem('expiry-eyes-token', res.data.token);
+      // Obtener user_id llamando a /auth/me y guardar en localStorage
+      try {
+        const meRes = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
+          headers: { Authorization: `Bearer ${res.data.token}` }
+        });
+        if (meRes.data && meRes.data.id) {
+          localStorage.setItem('user_id', meRes.data.id);
+        }
+      } catch (err) {
+        // Si falla, solo loguea el error, pero sigue adelante
+        console.error('Error obteniendo user_id tras login Google:', err);
+      }
       router.push('/tabs/home');
     } else {
       alert('No se pudo validar el login con Google. Intenta otra vez.');
