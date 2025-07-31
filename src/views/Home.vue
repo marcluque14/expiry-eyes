@@ -19,7 +19,7 @@
           <img src="../assets/Comedor.jpg" alt="Comedor" style="width: 100%; border-radius: 8px;" />
         </div>
       </div>
-      <div class="logout-icon-container" style="text-align: right; margin: 50px 10px 25px 0;">
+      <div class="logout-icon-container">
         <ion-icon :icon="logOut" @click="logout" style="font-size: 24px; cursor: pointer; color: red;"></ion-icon>
       </div>
       <div class="search-bar-container">
@@ -27,140 +27,139 @@
       </div>
 
       <div class="quick-actions">
-        <ion-button fill="outline" color="primary">
-          <ion-icon slot="start" :icon="heart" color="primary"></ion-icon>
-          Favorites
-        </ion-button>
-        <ion-button fill="outline" color="primary">
-          <ion-icon slot="start" :icon="refresh" color="primary"></ion-icon>
-          History
-        </ion-button>
-        <ion-button fill="outline" color="primary">
-          <ion-icon slot="start" :icon="personCircleOutline" color="primary"></ion-icon>
-          Following
-        </ion-button>
+        <div style="padding: 0;">
+          <div style="padding: 0;">
+            <div>
+              <!-- Carrusel horizontal actualizado de categorías -->
+              <div style="overflow-x: auto; white-space: nowrap;">
+                <div style="display: inline-block; min-width: 100%;">
+                  <div style="display: flex; flex-direction: row; align-items: flex-start;">
+                    <div style="padding: 0;">
+                      <div style="padding-bottom: 16px;">
+                        <!-- Bloque actualizado (DART) convertido a HTML/CSS -->
+                        <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%;">
+                          <!-- Colegios -->
+                          <div style="padding-left: 12px;">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                              <div
+                                class="category-circle"
+                                style="
+                                  width: 72px; height: 72px;
+                                  background: #bdbdbd;
+                                  border-radius: 50%;
+                                  overflow: hidden;
+                                  display: flex; align-items: center; justify-content: center;
+                                "
+                              >
+                                <img src="../assets/Bresol.avif" alt="Colegios" style="width: 100%; height: 100%; object-fit: cover;" />
+                              </div>
+                              <div style="font-size: 13px; margin-top: 4px;">Colegios</div>
+                            </div>
+                          </div>
+                          <!-- Supermercados -->
+                          <div style="padding-left: 12px;">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                              <div
+                                class="category-circle"
+                                style="
+                                  width: 72px; height: 72px;
+                                  background: #bdbdbd;
+                                  border-radius: 50%;
+                                  overflow: hidden;
+                                  display: flex; align-items: center; justify-content: center;
+                                "
+                              >
+                                <img src="../assets/mercadona.png" alt="Supermercados" style="width: 100%; height: 100%; object-fit: cover;" />
+                              </div>
+                              <div style="font-size: 13px; margin-top: 4px;">Supermercados</div>
+                            </div>
+                          </div>
+                          <!-- Restaurantes -->
+                          <div style="padding-left: 12px;">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                              <div
+                                class="category-circle"
+                                style="
+                                  width: 72px; height: 72px;
+                                  background: #bdbdbd;
+                                  border-radius: 50%;
+                                  overflow: hidden;
+                                  display: flex; align-items: center; justify-content: center;
+                                "
+                              >
+                                <img src="../assets/restaurantes.jpeg" alt="Restaurantes" style="width: 100%; height: 100%; object-fit: cover;" />
+                              </div>
+                              <div style="font-size: 13px; margin-top: 4px;">Restaurantes</div>
+                            </div>
+                          </div>
+                          <!-- Comercios -->
+                          <div style="padding-left: 12px;">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                              <div
+                                class="category-circle"
+                                style="
+                                  width: 72px; height: 72px;
+                                  background: #bdbdbd;
+                                  border-radius: 50%;
+                                  overflow: hidden;
+                                  display: flex; align-items: center; justify-content: center;
+                                "
+                              >
+                                <img src="../assets/comercio.png" alt="Comercios" style="width: 100%; height: 100%; object-fit: cover;" />
+                              </div>
+                              <div style="font-size: 13px; margin-top: 4px;">Comercios</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <h4 class="section-subtitle">Novedades</h4>
 
-      <div class="promo-scroll">
-        <div class="promo-card blue-gradient" @click="goToDiscounts">
-          <h2>Ahorra más de un 50%</h2>
-          <p>Consulta los productos con más descuento</p>
-        </div>
-        <div class="promo-card green-gradient" @click="goToEcoFriendly">
-          <h2>Eco-friendly Week</h2>
-          <p>Salva Productos Ecológicos cerca de ti</p>
-        </div>
-        <div class="promo-card gold-gradient" @click="goToOfertas">
-          <h2>Descubre ofertas</h2>
-          <p>Primer mes con envío gratuito</p>
-        </div>
+      <div class="stacked-carousel carousel-frame bordered-novedades">
+        <img
+          src="@/assets/Bresol.avif"
+          class="carousel-image zoomable"
+          @click="openFullscreen('@/assets/Bresol.avif')"
+        />
       </div>
 
-      <div class="school-cards-section">
-        <h4 class="section-subtitle">¡También en Escuelas!</h4>
-        <div class="school-card-list">
-          <div class="school-card" @click="showLaSallePopup">
-            <img src="../assets/Salle.png" alt="La Salle" />
-            <p>La Salle</p>
-          </div>
-          <div class="school-card" @click="mostrarBresol">
-            <img src="@/assets/Bresol.avif" />
-            <p>Bresol</p>
-          </div>
-          <div class="school-card" @click="router.push('/colegio/Jaume Vicens Vives')">
-            <img src="@/assets/JaumeVicensVives.png" alt="Jaume Vicens Vives" />
-            <p>Jaume Vicens Vives</p>
-          </div>
-        </div>
-      </div>
-      <div
-        v-if="showPopupLaSalle"
-        class="popup"
-        style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-               background-color: white; border-radius: 20px; padding: 20px; width: 80%;
-               box-shadow: 0px 4px 16px rgba(0,0,0,0.3); z-index: 1000; text-align: center;">
-        <button @click="showPopupLaSalle = false"
-          style="position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 20px;">✖</button>
-        <h2>Espaguetis por solo 2.5 €</h2>
-        <img src="@/assets/Espaguetis.jpg" alt="Espaguetis" style="width: 100%; border-radius: 12px; margin-top: 10px;" />
-        <IonButton expand="block" color="success" class="ion-margin-top"
-          @click="openMapsLaSalle()">Ir a buscarlo</IonButton>
-      </div>
-
-      <div class="supermarkets">
-        <h4 class="supermarket-title">Supermercados</h4>
-        <div class="supermarket-scroll">
-          <div class="supermarket-card" v-for="supermarket in supermarkets" :key="supermarket.name">
-            <div class="supermarket-info green-gradient">
-              <h4>{{ supermarket.offer }}</h4>
-              <p>{{ supermarket.distance }}km</p>
+      <div class="espaciador">
+      <div style="margin-top: 10px; padding-top: 10px; border-top: 2px solid #e0e0e0;"></div>
+      <div style="background-color: #e5f9e7; border-radius: 16px; padding: 20px; margin: 10px;">
+        <div class="sostenibilidad-section">
+          <h4 class="section-subtitle">🌱 Sostenibilidad y ExpiryEyes</h4>
+          <p class="section-description">Actuamos por un futuro más justo, saludable y sostenible.</p>
+          <div class="sostenibilidad-grid">
+            <div class="sostenibilidad-card">
+              <img src="../assets/Bancaliments.png" alt="ONGs" class="sostenibilidad-icon" />
+              <h5>ONGs</h5>
+              <p>Dona a organizaciones asociadas y evita el desperdicio alimentario.</p>
             </div>
-            <div class="supermarket-bottom">
-              <img :src="supermarket.logo" :alt="supermarket.name" />
-              <p>{{ supermarket.name }}</p>
+            <div class="sostenibilidad-card">
+              <img src="../assets/comercio.png" alt="Únete a la causa" class="sostenibilidad-icon" />
+              <h5>Únete a la causa</h5>
+              <p>¿Tienes un comercio? Súmate y ayuda reduciendo residuos.</p>
+            </div>
+            <div class="sostenibilidad-card">
+              <img src="../assets/ayuntamiento.png" alt="Nuestros Socios" class="sostenibilidad-icon" />
+              <h5>Nuestros Socios</h5>
+              <p>Colaboramos con ayuntamientos y entidades públicas.</p>
+            </div>
+            <div class="sostenibilidad-card">
+              <img src="../assets/sostenibilidad.png" alt="Eco-Gestión" class="sostenibilidad-icon" />
+              <h5>Gestión Eco-Friendly</h5>
+              <p>Optimizamos procesos para reducir huella ecológica.</p>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="recently-viewed">
-        <h4 class="section-subtitle">Visto Recientemente</h4>
-        <div class="recent-item">
-          <img src="../assets/iogurt.png" alt="Iogurt Natural Danone" />
-          <div class="recent-info">
-            <p class="product-name">Iogurt Natural Danone</p>
-            <p class="seen-time">Visto hace 1 minuto</p>
-            <p class="price">1.29€ <span class="discount">-60%</span></p>
-          </div>
-          <div class="recent-units">8ud</div>
-        </div>
-
-        <div class="recent-item">
-          <img src="../assets/leche.png" alt="Leche de Arroz x6" />
-          <div class="recent-info">
-            <p class="product-name">Leche de Arroz x6</p>
-            <p class="seen-time">Visto hace 2 horas</p>
-            <p class="price">4.99€ <span class="discount">-55%</span></p>
-          </div>
-          <div class="recent-units">6ud</div>
-        </div>
-
-        <div class="recent-item">
-          <img src="../assets/zumo.png" alt="Zumo de Naranja 1L" />
-          <div class="recent-info">
-            <p class="product-name">Zumo de Naranja 1L</p>
-            <p class="seen-time">Visto hace 6h</p>
-            <p class="price">1.19€ <span class="discount">-30%</span></p>
-          </div>
-          <div class="recent-units">12ud</div>
-        </div>
-      </div>
-      <div class="sostenibilidad-section">
-        <h4 class="section-subtitle">Sostenibilidad y ExpiryEyes</h4>
-        <p class="section-description">Información de interés</p>
-        <div class="sostenibilidad-cards">
-          <div class="sostenibilidad-card">
-            <img src="../assets/Bancaliments.png" alt="ONGs" class="sostenibilidad-icon" />
-            <h5>ONGs</h5>
-            <p>Dona a ONGs asociadas</p>
-          </div>
-          <div class="sostenibilidad-card">
-            <img src="../assets/comercio.png" alt="Únete a la causa" class="sostenibilidad-icon" />
-            <h5>Únete a la causa</h5>
-            <p>Tienes un Comercio? Contáctanos y ahorra</p>
-          </div>
-          <div class="sostenibilidad-card">
-            <img src="../assets/ayuntamiento.png" alt="Nuestros Socios" class="sostenibilidad-icon" />
-            <h5>Nuestros Socios</h5>
-            <p>Descubre qué empresas colaboran con nosotros</p>
-          </div>
-          <div class="sostenibilidad-card">
-            <img src="../assets/sostenibilidad.png" alt="Gestión Eco-friendly" class="sostenibilidad-icon" />
-            <h5>Gestión Eco-friendly</h5>
-            <p>Sostenibilidad y nuestra App</p>
-          </div>
-        </div>
       </div>
       <div v-if="showBresolPopup" class="popup-overlay">
         <div class="popup-content">
@@ -184,6 +183,10 @@
         </div>
       </div>
     </ion-content>
+    <div v-if="showFullscreen" class="fullscreen-overlay" @touchstart="startTouch" @touchmove="handleTouchMove">
+      <img :src="fullscreenImage" class="fullscreen-image" />
+      <button class="close-button" @click="closeFullscreen">✖</button>
+    </div>
   </ion-page>
 </template>
 
@@ -287,6 +290,36 @@ function cerrarPopupBresol() {
 const refreshHome = () => {
   router.replace('/tabs/home')
   window.location.reload()
+}
+
+const activeSlideIndex = ref(0);
+// setInterval(() => {
+//   activeSlideIndex.value = (activeSlideIndex.value + 1) % 3;
+// }, 3000);
+
+// Fullscreen carousel image logic
+const showFullscreen = ref(false);
+const fullscreenImage = ref('');
+const touchStartY = ref(0);
+
+function openFullscreen(imagePath) {
+  fullscreenImage.value = require(imagePath);
+  showFullscreen.value = true;
+}
+
+function closeFullscreen() {
+  showFullscreen.value = false;
+}
+
+function startTouch(e) {
+  touchStartY.value = e.touches[0].clientY;
+}
+
+function handleTouchMove(e) {
+  const touchY = e.touches[0].clientY;
+  if (touchY - touchStartY.value > 80) {
+    closeFullscreen();
+  }
 }
 </script>
 
@@ -513,53 +546,57 @@ ion-slides {
   font-weight: bold;
 }
 
-.sostenibilidad-section {
-  margin-top: 40px;
+.espaciador {
+  margin-top: 10px;
 }
+  .sostenibilidad-section {
+    padding: 24px;
+    background: linear-gradient(135deg, #e0f8dc 0%, #d1f2c6 100%);
+    border-radius: 16px;
+    margin: 20px 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
 
-.sostenibilidad-section .section-subtitle {
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
+  .sostenibilidad-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
 
-.sostenibilidad-section .section-description {
-  font-size: 14px;
-  color: gray;
-  margin-bottom: 15px;
-}
+  .sostenibilidad-card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.sostenibilidad-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
-}
+  .sostenibilidad-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
 
-.sostenibilidad-card {
-  flex: 0 0 48%;
-  background: linear-gradient(to top, #38a169, #a0f0a0);
-  border-radius: 10px;
-  padding: 10px;
-  color: white;
-}
+  .sostenibilidad-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 12px;
+  }
 
-.sostenibilidad-card h5 {
-  margin: 0 0 5px 0;
-}
+  .sostenibilidad-card h5 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2e7d32;
+  }
 
-.sostenibilidad-card p {
-  margin: 0;
-  font-size: 12px;
-}
-
-.sostenibilidad-icon {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  margin: 0 auto 10px auto;
-  display: block;
-}
+  .sostenibilidad-card p {
+    font-size: 13px;
+    color: #555;
+    margin-top: 6px;
+  }
 
 .school-notice {
   position: fixed;
@@ -723,10 +760,118 @@ ion-slides {
   font-size: 1.5rem;
   cursor: pointer;
 }
+
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fullscreen-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
+}
+
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 30px;
+}
+  .zoomable {
+    transition: transform 0.4s ease-in-out;
+    transform: scale(1);
+    cursor: pointer;
+  }
+
+  .zoomable:hover {
+    transform: scale(1.03);
+  }
+
+  .fullscreen-overlay {
+    animation: fadeIn 0.4s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  .category-circle {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .category-circle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+  .logout-icon-container {
+    text-align: right;
+    margin: 10px 10px 15px 0;
+  }
 </style>
 
-const showBresol = ref(false);
+ .stacked-carousel {
+   position: relative;
+   width: 100%;
+   height: 90px;
+   margin-bottom: 20px;
+   overflow: hidden;
+ }
+
+ .carousel-frame {
+   border-radius: 20px;
+   border: 2px solid white;
+   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+ }
+
+ .carousel-image {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 50%;
+   height: 50%;
+   object-fit: contain;
+   border-radius: 20px;
+   transition: opacity 1s ease-in-out;
+   margin: 0 auto;
+   max-width: 80%;
+   border: 2px solid white;
+   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+ }
+
+ .fade-enter-active, .fade-leave-active {
+   transition: opacity 1s;
+ }
+ .fade-enter-from, .fade-leave-to {
+   opacity: 0;
+ }
 // Dummy handler for Salle popup location button to prevent error if not present
 function openSalleLocation() {
   window.open("https://www.google.com/maps?q=Carrer+de+Sant+Joan+Bta.+la+Salle,+12,+17002+Girona", "_blank");
+}
+.stacked-carousel {
+  margin-top: 10px;
+}
+
+.bordered-novedades {
+  border: 2px solid #ccc;
+  border-radius: 16px;
+  padding: 8px;
+  background-color: white;
 }
