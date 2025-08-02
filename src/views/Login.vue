@@ -141,7 +141,7 @@
     }
     isLoading.value = true;
     try {
-      const res = await axios.post('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/login', {
+      const res = await axios.post('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/login', {
         email: username.value,
         password: password.value,
       });
@@ -149,7 +149,7 @@
       if (res.data && res.data.authToken) {
         saveSession(res.data.authToken);
 
-        const userRes = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
+        const userRes = await axios.get('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/me', {
           headers: { Authorization: `Bearer ${res.data.authToken}` }
         });
 
@@ -176,7 +176,7 @@
     }
     isLoading.value = true;
     try {
-      const res = await axios.post('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/signup', {
+      const res = await axios.post('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/signup', {
         name: registerUsername.value,
         email: registerEmail.value,
         password: registerPassword.value,
@@ -190,7 +190,7 @@
         registerEmail.value = '';
         registerPassword.value = '';
 
-        const meRes = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
+        const meRes = await axios.get('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/me', {
           headers: { Authorization: `Bearer ${res.data.token || res.data.authToken}` }
         });
         // Guarda el user_id al localStorage just després d'obtenir meRes
@@ -213,7 +213,7 @@
   
   async function signInWithGoogle() {
     try {
-      const res = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:MPNZDU19/oauth/google/init', {
+      const res = await axios.get('https://xqy3-nsl3-g9gf.n7e.xano.io/api:MPNZDU19/oauth/google/init', {
         params: {
           redirect_uri: 'http://localhost:5173/oauth/google/callback'
         }
@@ -245,7 +245,7 @@
     }
     isLoading.value = true;
     try {
-      const res = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
+      const res = await axios.get('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/me', {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data && res.data.email) {

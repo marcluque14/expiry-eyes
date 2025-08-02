@@ -21,7 +21,7 @@ onMounted(async () => {
   }
 
   try {
-    const res = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:MPNZDU19/oauth/google/continue', {
+    const res = await axios.get('https://xqy3-nsl3-g9gf.n7e.xano.io/api:MPNZDU19/oauth/google/continue', {
       params: {
         code,
         redirect_uri: 'http://localhost:5173/oauth/google/callback'
@@ -35,7 +35,7 @@ onMounted(async () => {
       localStorage.setItem('expiry-eyes-token', res.data.token);
       // Obtener user_id llamando a /auth/me y guardar en localStorage
       try {
-        const meRes = await axios.get('https://x8ki-letl-twmt.n7.xano.io/api:B0XRi_En/auth/me', {
+        const meRes = await axios.get('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/me', {
           headers: { Authorization: `Bearer ${res.data.token}` }
         });
         if (meRes.data && meRes.data.id) {

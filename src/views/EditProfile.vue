@@ -58,12 +58,13 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import router from '../router';
 import axios from 'axios';
 import { IonPage, IonHeader, IonToolbar, IonButtons, IonBackButton, IonTitle, IonContent, IonInput, IonButton, IonIcon, IonItem, IonLabel, IonCard } from '@ionic/vue';
 import { pencilOutline } from 'ionicons/icons';
 
 const route = useRoute();
-const router = useRouter();
+const routerInstance = useRouter();
 
 const id = localStorage.getItem("user_id");
 
@@ -90,11 +91,11 @@ async function fetchUser() {
   try {
     const token = localStorage.getItem('expiry-eyes-token');
     if (!token || token === "null") {
-      router.push("/login");
+      routerInstance.push("/login");
       return;
     }
     const headers = { Authorization: `Bearer ${token}` };
-    const response = await fetch(`https://x8ki-letl-twmt.n7.xano.io/api:HWiWww8T/user/${id}`, {
+    const response = await fetch(`https://xqy3-nsl3-g9gf.n7e.xano.io/api:HWiWww8T/user/${id}`, {
       headers,
     });
     const data = await response.json();
@@ -120,7 +121,7 @@ async function fetchUser() {
 onMounted(() => {
   const token = localStorage.getItem('expiry-eyes-token');
   if (!token || token === "null") {
-    router.push("/login");
+    routerInstance.push("/login");
     return;
   }
   if (id) {
@@ -131,7 +132,7 @@ onMounted(() => {
 const saveProfile = async () => {
   try {
     const userId = user.value.id || id;
-    await axios.patch(`https://x8ki-letl-twmt.n7.xano.io/api:HWiWww8T/user/${userId}`, {
+    await axios.patch(`https://xqy3-nsl3-g9gf.n7e.xano.io/api:HWiWww8T/user/${userId}`, {
       name: user.value.name,
       lastName: user.value.lastName,
       email: user.value.email,
@@ -142,6 +143,7 @@ const saveProfile = async () => {
     });
     console.log('Perfil actualitzat correctament');
     router.push('/myProfilePage');
+    router.push('/tabs/home');
   } catch (error) {
     console.error('Error guardant el perfil:', error);
     alert('Error guardant el perfil. Revisa els camps.');

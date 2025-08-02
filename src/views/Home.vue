@@ -142,12 +142,12 @@
               <h5>ONGs</h5>
               <p>Dona a organizaciones asociadas y evita el desperdicio alimentario.</p>
             </div>
-            <div class="sostenibilidad-card">
+            <div class="sostenibilidad-card" @click="$router.push('/unete')" style="cursor: pointer;">
               <img src="../assets/comercio.png" alt="Únete a la causa" class="sostenibilidad-icon" />
               <h5>Únete a la causa</h5>
               <p>¿Tienes un comercio? Súmate y ayuda reduciendo residuos.</p>
             </div>
-            <div class="sostenibilidad-card">
+            <div class="sostenibilidad-card" @click="$router.push('/ayuntamientos')" style="cursor: pointer;">
               <img src="../assets/ayuntamiento.png" alt="Nuestros Socios" class="sostenibilidad-icon" />
               <h5>Nuestros Socios</h5>
               <p>Colaboramos con ayuntamientos y entidades públicas.</p>

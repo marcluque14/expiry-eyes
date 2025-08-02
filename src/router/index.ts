@@ -7,6 +7,9 @@ import Login from '../views/Login.vue';
 import HomeEmpresa from '../views/HomeEmpresa.vue';
 import Signup from '../views/Signup.vue';
 import EditProfile from '../views/EditProfile.vue';
+import Ayuntamientos from '../views/Ayuntamientos.vue';
+import Impacto from '../views/Impacto.vue';
+import Unete from '../views/Unete.vue';
 
 const routes = [
   {
@@ -69,6 +72,26 @@ const routes = [
     path: '/producto/:product_id',
     name: 'ProductDetails',
     component: () => import('@/views/ProductDetails.vue')
+  },
+  {
+    path: '/ayuntamientos',
+    component: Ayuntamientos,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/unete',
+    component: Unete,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/impacto',
+    component: Impacto,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/proyectos',
+    component: () => import('@/views/Proyectos.vue'),
+    meta: { requiresAuth: true }
   },
   {
     path: '/:catchAll(.*)',

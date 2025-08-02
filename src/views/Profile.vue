@@ -82,7 +82,7 @@ onMounted(async () => {
   }
   try {
     const res = await axios.get(
-      `https://x8ki-letl-twmt.n7.xano.io/api:HWiWww8T/user/${userId}`,
+      `https://xqy3-nsl3-g9gf.n7e.xano.io/api:HWiWww8T/user/${userId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`, // comenta aquesta línia si no tens auth
@@ -92,7 +92,7 @@ onMounted(async () => {
     user.value = res.data;
 
     if (res.data.FotoPerfil?.path) {
-      user.value.logo = `https://x8ki-letl-twmt.n7.xano.io${res.data.FotoPerfil.path}`;
+      user.value.logo = `https://xqy3-nsl3-g9gf.n7e.xano.io${res.data.FotoPerfil.path}`;
     }
 
     // Separa nom i cognom (si vols mostrar-los per separat)
