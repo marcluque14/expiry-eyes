@@ -1,0 +1,45 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "1234",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "cliente1",
+      "password": "abcd",
+      "role": "user"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Yogur Natural",
+      "originalPrice": 1.20,
+      "discountedPrice": 0.50,
+      "expiryDate": "2025-06-30T23:59:59Z",
+      "supermarket": "Mercadona Girona Carrer Barcelona",
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": "Pan de molde",
+      "originalPrice": 1.50,
+      "discountedPrice": 0.60,
+      "expiryDate": "2025-06-29T23:59:59Z",
+      "supermarket": "Mercadona Girona Pont Major",
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "Leche entera",
+      "originalPrice": 0.90,
+      "discountedPrice": 0.40,
+      "expiryDate": "2025-06-28T23:59:59Z",
+      "supermarket": "Mercadona Salt",
+      "available": true
+    }
+  ]
+}
