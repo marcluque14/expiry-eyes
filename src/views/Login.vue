@@ -267,18 +267,21 @@
         alert('Falta configurar VITE_XANO_OAUTH_BASE con el grupo que tiene /oauth/google/init.');
         return;
       }
+      const REDIRECT_URI = import.meta.env.GOOGLE_REDIRECT_URI || 'http://localhost:5173/oauth/google/callback';
       const res = await axios.get(`${XANO_OAUTH_BASE}/oauth/google/init`, {
         params: {
-          redirect_uri: 'http://localhost:5173/oauth/google/callback'
-        }
+          redirect_uri: REDIRECT_URI,
+        },
       });
       if (res.data && res.data.authUrl) {
-        window.location.href = res.data.authUrl;  // Redirigeix a Google
+        window.location.href = res.data.authUrl;
       } else {
-        alert('Error obtenint URL d\'autenticació Google');
+        console.error('Respuesta inesperada de init OAuth:', res.data);
+        alert('No se ha podido obtener la URL de autenticación de Google.');
       }
-    } catch (error) {
-      alert('Error en login Google');
+    } catch (error: any) {
+      const msg = error?.response?.data?.message || error?.message || 'Error desconegut';
+      alert('Error en login Google: ' + msg);
       console.error(error);
     }
   }

@@ -5,51 +5,73 @@
         <ion-buttons slot="start">
           <ion-back-button defaultHref="/tabs/home" />
         </ion-buttons>
-        <ion-title>Mi perfil</ion-title>
-        <ion-buttons slot="end">
-          <ion-button @click="goToEditProfile">
-            <ion-icon slot="icon-only" :icon="pencilOutline" />
-          </ion-button>
-        </ion-buttons>
+        <ion-title>👤 Mi perfil</ion-title>
       </ion-toolbar>
     </ion-header>
 
     <ion-content class="ion-padding">
-      
+
       <div class="profile-header">
-        <img
-          class="avatar"
-          :src="user.logo || 'https://i.pravatar.cc/150?img=3'"
-          alt="User Avatar"
-        />
-        <h2>{{ user.name }}</h2>
-        <p class="email">{{ user.email }}</p>
+        <div class="avatar-wrapper">
+          <img
+            v-if="user.logo"
+            class="avatar"
+            :src="user.logo"
+            alt="User Avatar"
+            @error="user.logo = ''"
+          />
+          <div v-else class="avatar initials">
+            {{ firstName.charAt(0) }}
+          </div>
+        </div>
+        <h2>{{ user.name || 'Usuari' }}</h2>
+        <p class="email">✉️ {{ user.email }}</p>
+        <span class="chip" v-if="user.Location">📍 {{ user.Location }}</span>
       </div>
 
-      <ion-item>
-        <ion-label>Nom</ion-label>
-        <div>{{ firstName }}</div>
-      </ion-item>
-      <ion-item>
-        <ion-label>Cognom</ion-label>
-        <div>{{ user.lastName }}</div>
-      </ion-item>
-      <ion-item>
-        <ion-label>Correu electrònic</ion-label>
-        <div>{{ user.email }}</div>
-      </ion-item>
-      <ion-item>
-        <ion-label>Telèfon</ion-label>
-        <div>{{ user.Telefono }}</div>
-      </ion-item>
-      <ion-item>
-        <ion-label>Ubicació</ion-label>
-        <div>{{ user.Location }}</div>
-      </ion-item>
-      <ion-item>
-        <ion-label>Data de naixement</ion-label>
-        <div>{{ user.Fecha_Nacimento }}</div>
-      </ion-item>
+      <div class="info-card">
+        <ion-item lines="none">
+          <ion-label>
+            🧑‍💼 Nom
+            <p>{{ firstName || '—' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            👤 Cognom
+            <p>{{ user.lastName || '—' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            ✉️ Correu electrònic
+            <p>{{ user.email || '—' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            📞 Telèfon
+            <p>{{ user.Telefono || '—' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            📍 Ubicació
+            <p>{{ user.Location || '—' }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-label>
+            🎂 Data de naixement
+            <p>{{ user.Fecha_Nacimento || '—' }}</p>
+          </ion-label>
+        </ion-item>
+      </div>
+
+      <ion-button expand="block" shape="round" color="primary" @click="goToEditProfile">
+        ✏️ Editar perfil
+      </ion-button>
+
     </ion-content>
   </ion-page>
 </template>
@@ -57,9 +79,8 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import axios from "axios";
-import { pencilOutline } from 'ionicons/icons'
 import { useRouter } from 'vue-router'
-import { IonIcon } from '@ionic/vue';
+import { onIonViewWillEnter } from '@ionic/vue'
 
 const user = ref({});
 const firstName = ref("");
@@ -75,7 +96,7 @@ const token = localStorage.getItem("expiry-eyes-token");
 const rawId = localStorage.getItem("user_id");
 const userId = rawId && rawId !== "null" ? rawId : null;
 
-onMounted(async () => {
+async function loadProfile() {
   if (!userId) {
     console.warn("user_id no trobat al localStorage");
     return;
@@ -85,79 +106,99 @@ onMounted(async () => {
       `https://xqy3-nsl3-g9gf.n7e.xano.io/api:HWiWww8T/user/${userId}`,
       {
         headers: {
-          Authorization: `Bearer ${token}`, // comenta aquesta línia si no tens auth
+          Authorization: `Bearer ${token}`,
         },
       }
     );
-    user.value = res.data;
+    user.value = res.data || {};
 
-    if (res.data.FotoPerfil?.path) {
+    if (res.data?.FotoPerfil?.path) {
       user.value.logo = `https://xqy3-nsl3-g9gf.n7e.xano.io${res.data.FotoPerfil.path}`;
     }
 
-    // Separa nom i cognom (si vols mostrar-los per separat)
-    const parts = res.data.name?.split(" ");
-    firstName.value = parts?.[0] || "";
+    const parts = res.data?.name?.split(" ") || [];
+    firstName.value = parts[0] || "";
 
-    // Assegura que user.value.email estigui inicialitzat correctament
-    if (!user.value.email) {
-      user.value.email = "";
-    }
+    if (!user.value.email) user.value.email = "";
   } catch (error) {
     console.error("Error cargando el perfil:", error);
   }
-});
+}
+
+onMounted(loadProfile)
+onIonViewWillEnter(loadProfile)
 </script>
 
 <style scoped>
 .profile-header {
-  position: relative;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+.avatar-wrapper {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 10px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #3b82f6;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e5e7eb;
 }
 
 .avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin: 10px auto;
-  display: block;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+}
+
+.avatar.initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  font-size: 36px;
+  font-weight: 700;
+  color: #3b82f6;
 }
 
 .email {
   color: gray;
   font-size: 14px;
-  margin-bottom: 10px;
+  margin: 5px 0 10px;
+}
+
+.info-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+  padding: 10px;
+  margin-bottom: 20px;
 }
 
 ion-item {
-  --padding-start: 16px;
-  --inner-padding-end: 16px;
-  margin-bottom: 12px;
+  --inner-padding-end: 0;
+  --padding-start: 0;
+  --min-height: 48px;
 }
 
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-}
-
-.form-card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.form-card label {
-  font-size: 12px;
-  color: gray;
-}
-
-.form-card p {
-  font-size: 16px;
+ion-label p {
+  margin: 2px 0 0;
   font-weight: bold;
-  margin: 5px 0 0;
+  color: #111;
+}
+
+.chip {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef4ff;
+  color: #2b5fb8;
+  border: 1px solid rgba(43,95,184,0.15);
+  font-size: 12px;
 }
 </style>
