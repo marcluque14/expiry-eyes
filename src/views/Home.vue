@@ -26,88 +26,91 @@
         <ion-searchbar placeholder="Search"></ion-searchbar>
       </div>
 
-      <div class="quick-actions">
-        <div style="padding: 0;">
+      <div class="coming-soon-section">
+        <h6 class="coming-soon-title">Muy pronto</h6>
+        <div class="quick-actions">
           <div style="padding: 0;">
-            <div>
-              <!-- Carrusel horizontal actualizado de categorías -->
-              <div style="overflow-x: auto; white-space: nowrap;">
-                <div style="display: inline-block; min-width: 100%;">
-                  <div style="display: flex; flex-direction: row; align-items: flex-start;">
-                    <div style="padding: 0;">
-                      <div style="padding-bottom: 16px;">
-                        <!-- Bloque actualizado (DART) convertido a HTML/CSS -->
-                        <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%;">
-                          <!-- Colegios -->
-                          <div style="padding-left: 12px;">
-                            <div style="display: flex; flex-direction: column; align-items: center;">
-                              <div
-                                class="category-circle"
-                                style="
-                                  width: 72px; height: 72px;
-                                  background: #bdbdbd;
-                                  border-radius: 50%;
-                                  overflow: hidden;
-                                  display: flex; align-items: center; justify-content: center;
-                                "
-                              >
-                                <img src="../assets/Bresol.avif" alt="Colegios" style="width: 100%; height: 100%; object-fit: cover;" />
+            <div style="padding: 0;">
+              <div>
+                <!-- Carrusel horizontal actualizado de categorías -->
+                <div style="overflow-x: auto; white-space: nowrap;">
+                  <div style="display: inline-block; min-width: 100%;">
+                    <div style="display: flex; flex-direction: row; align-items: flex-start;">
+                      <div style="padding: 0;">
+                        <div style="padding-bottom: 16px;">
+                          <!-- Bloque actualizado (DART) convertido a HTML/CSS -->
+                          <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%;">
+                            <!-- Colegios -->
+                            <div style="padding-left: 12px;">
+                              <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div
+                                  class="category-circle"
+                                  style="
+                                    width: 72px; height: 72px;
+                                    background: #bdbdbd;
+                                    border-radius: 50%;
+                                    overflow: hidden;
+                                    display: flex; align-items: center; justify-content: center;
+                                  "
+                                >
+                                  <img src="../assets/Bresol.avif" alt="Colegios" style="width: 100%; height: 100%; object-fit: cover;" />
+                                </div>
+                                <div style="font-size: 13px; margin-top: 4px;">Colegios</div>
                               </div>
-                              <div style="font-size: 13px; margin-top: 4px;">Colegios</div>
                             </div>
-                          </div>
-                          <!-- Supermercados -->
-                          <div style="padding-left: 12px;">
-                            <div style="display: flex; flex-direction: column; align-items: center;">
-                              <div
-                                class="category-circle"
-                                style="
-                                  width: 72px; height: 72px;
-                                  background: #bdbdbd;
-                                  border-radius: 50%;
-                                  overflow: hidden;
-                                  display: flex; align-items: center; justify-content: center;
-                                "
-                              >
-                                <img src="../assets/mercadona.png" alt="Supermercados" style="width: 100%; height: 100%; object-fit: cover;" />
+                            <!-- Supermercados -->
+                            <div style="padding-left: 12px;">
+                              <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div
+                                  class="category-circle"
+                                  style="
+                                    width: 72px; height: 72px;
+                                    background: #bdbdbd;
+                                    border-radius: 50%;
+                                    overflow: hidden;
+                                    display: flex; align-items: center; justify-content: center;
+                                  "
+                                >
+                                  <img src="../assets/mercadona.png" alt="Supermercados" style="width: 100%; height: 100%; object-fit: cover;" />
+                                </div>
+                                <div style="font-size: 13px; margin-top: 4px;">Supermercados</div>
                               </div>
-                              <div style="font-size: 13px; margin-top: 4px;">Supermercados</div>
                             </div>
-                          </div>
-                          <!-- Restaurantes -->
-                          <div style="padding-left: 12px;">
-                            <div style="display: flex; flex-direction: column; align-items: center;">
-                              <div
-                                class="category-circle"
-                                style="
-                                  width: 72px; height: 72px;
-                                  background: #bdbdbd;
-                                  border-radius: 50%;
-                                  overflow: hidden;
-                                  display: flex; align-items: center; justify-content: center;
-                                "
-                              >
-                                <img src="../assets/restaurantes.jpeg" alt="Restaurantes" style="width: 100%; height: 100%; object-fit: cover;" />
+                            <!-- Restaurantes -->
+                            <div style="padding-left: 12px;">
+                              <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div
+                                  class="category-circle"
+                                  style="
+                                    width: 72px; height: 72px;
+                                    background: #bdbdbd;
+                                    border-radius: 50%;
+                                    overflow: hidden;
+                                    display: flex; align-items: center; justify-content: center;
+                                  "
+                                >
+                                  <img src="../assets/restaurantes.jpeg" alt="Restaurantes" style="width: 100%; height: 100%; object-fit: cover;" />
+                                </div>
+                                <div style="font-size: 13px; margin-top: 4px;">Restaurantes</div>
                               </div>
-                              <div style="font-size: 13px; margin-top: 4px;">Restaurantes</div>
                             </div>
-                          </div>
-                          <!-- Comercios -->
-                          <div style="padding-left: 12px;">
-                            <div style="display: flex; flex-direction: column; align-items: center;">
-                              <div
-                                class="category-circle"
-                                style="
-                                  width: 72px; height: 72px;
-                                  background: #bdbdbd;
-                                  border-radius: 50%;
-                                  overflow: hidden;
-                                  display: flex; align-items: center; justify-content: center;
-                                "
-                              >
-                                <img src="../assets/comercio.png" alt="Comercios" style="width: 100%; height: 100%; object-fit: cover;" />
+                            <!-- Comercios -->
+                            <div style="padding-left: 12px;">
+                              <div style="display: flex; flex-direction: column; align-items: center;">
+                                <div
+                                  class="category-circle"
+                                  style="
+                                    width: 72px; height: 72px;
+                                    background: #bdbdbd;
+                                    border-radius: 50%;
+                                    overflow: hidden;
+                                    display: flex; align-items: center; justify-content: center;
+                                  "
+                                >
+                                  <img src="../assets/comercio.png" alt="Comercios" style="width: 100%; height: 100%; object-fit: cover;" />
+                                </div>
+                                <div style="font-size: 13px; margin-top: 4px;">Comercios</div>
                               </div>
-                              <div style="font-size: 13px; margin-top: 4px;">Comercios</div>
                             </div>
                           </div>
                         </div>
@@ -120,14 +123,10 @@
           </div>
         </div>
       </div>
-      <h4 class="section-subtitle">Novedades</h4>
-
-      <div class="stacked-carousel carousel-frame bordered-novedades">
-        <img
-          src="@/assets/Bresol.avif"
-          class="carousel-image zoomable"
-          @click="openFullscreen('@/assets/Bresol.avif')"
-        />
+      <div class="stacked-carousel bordered-novedades full-bleed">
+        <div class="gif-wrapper">
+          <img src="@/assets/VideoArcoiris.gif" alt="Únete al cambio" class="gif-cover" />
+        </div>
       </div>
 
       <div class="espaciador">
@@ -405,8 +404,7 @@ function handleTouchMove(e) {
 }
 
 .search-bar-container {
-  margin: 10px 0;
-  margin-top: 50px;
+  margin: 8px 0 12px;   /* reduce top whitespace */
 }
 
 .quick-actions {
@@ -825,53 +823,99 @@ ion-slides {
     margin: 10px 10px 15px 0;
   }
 </style>
-
- .stacked-carousel {
-   position: relative;
-   width: 100%;
-   height: 90px;
-   margin-bottom: 20px;
-   overflow: hidden;
- }
-
- .carousel-frame {
-   border-radius: 20px;
-   border: 2px solid white;
-   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
- }
-
- .carousel-image {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 50%;
-   height: 50%;
-   object-fit: contain;
-   border-radius: 20px;
-   transition: opacity 1s ease-in-out;
-   margin: 0 auto;
-   max-width: 80%;
-   border: 2px solid white;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
- }
-
- .fade-enter-active, .fade-leave-active {
-   transition: opacity 1s;
- }
- .fade-enter-from, .fade-leave-to {
-   opacity: 0;
- }
-// Dummy handler for Salle popup location button to prevent error if not present
-function openSalleLocation() {
-  window.open("https://www.google.com/maps?q=Carrer+de+Sant+Joan+Bta.+la+Salle,+12,+17002+Girona", "_blank");
+<style scoped>
+.coming-soon-section {
+  border: 2px dashed #bdbdbd;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 20px 10px;
+  background-color: #f9f9f9;
+  text-align: center;
 }
+.coming-soon-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #757575;
+}
+/* ====== GIF + título “¡Únete al cambio!” ====== */
+.unete-title {
+  text-align: center;        /* move title to the center */
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 8px 8px 8px;    /* small side margins */
+  color: #2e7d32;
+  width: 100%;
+  display: block;
+}
+
 .stacked-carousel {
-  margin-top: 10px;
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+  overflow: hidden;
 }
 
-.bordered-novedades {
-  border: 2px solid #ccc;
-  border-radius: 16px;
-  padding: 8px;
-  background-color: white;
+/* Contenedor sin padding para que ocupe todo el ancho del ion-content */
+.full-bleed {
+  margin-left: -16px;
+  margin-right: -16px;
+  width: calc(100% + 32px);
 }
+@media (min-width: 768px) {
+  .full-bleed {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+}
+
+/* Marco + centrado del GIF */
+.bordered-novedades {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto 20px;
+  height: 30vh;
+  max-height: 320px;
+  overflow: hidden;
+  border: none;
+  border-radius: 16px;
+  padding: 0;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;     /* align content to the center */
+  justify-content: center;   /* vertically center */
+  gap: 10px;
+}
+
+.gif-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* center media */
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+}
+
+.gif-cover {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0 auto;          /* center image horizontally */
+  object-fit: contain;
+  border-radius: 12px;
+}
+
+/* Vídeo (si en algún momento volvéis a usar mp4) */
+.hero-video {
+  width: 100%;
+  max-height: 280px;
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+</style>

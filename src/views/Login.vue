@@ -319,18 +319,20 @@
   </script>
   
   <style scoped>
-  .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f6f8fa;
-  }
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f6f8fa;
+  padding-top: 0;
+}
   
   .login-box {
     background-color: white;
     padding: 2rem 2.5rem;
-    width: 360px;
+    width: 90%;
+    max-width: 400px;
     border-radius: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
     text-align: center;
