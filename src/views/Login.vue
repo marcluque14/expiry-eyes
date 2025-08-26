@@ -128,7 +128,15 @@
   import { ref, onMounted } from 'vue';
   import { useRouter } from 'vue-router';
   import axios from 'axios';
-
+  const extractSuperId = (me: any) => (
+  me?.supermercado_id ??
+  me?.supermercados_id ??
+  me?.supermercadoId ??
+  me?.supermarket_id ??
+  me?.supermercado?.id ??
+  me?.supermarket?.id ??
+  null
+)
   const XANO_AUTH_BASE = import.meta.env.VITE_XANO_AUTH_BASE || '';
   const XANO_OAUTH_BASE = import.meta.env.VITE_XANO_OAUTH_BASE || XANO_AUTH_BASE || '';
   
@@ -162,12 +170,20 @@
   }
   
   async function login() {
-    if (!username.value || !password.value) {
-      alert('Si us plau, introdueix correu i contrasenya');
-      return;
-    }
     isLoading.value = true;
+    // Limpia posibles restos de sesiones anteriores
+    localStorage.removeItem('role');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('supermercado_id');
+    localStorage.removeItem('expiry-eyes-company');
+    localStorage.removeItem('company_name');
+    localStorage.removeItem('company_logo');
     try {
+      if (!username.value || !password.value) {
+        alert('Si us plau, introdueix correu i contrasenya');
+        isLoading.value = false;
+        return;
+      }
       const res = await axios.post('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/login', {
         email: username.value,
         password: password.value,
@@ -181,7 +197,25 @@
         });
 
         if (userRes.data && userRes.data.email) {
-          localStorage.setItem('user_id', userRes.data.id);
+          localStorage.setItem('user_id', String(userRes.data.id));
+          localStorage.setItem('role', userRes.data.role || '');
+          console.debug('[LOGIN] /auth/me payload:', userRes.data);
+          const sid = extractSuperId(userRes.data);
+          if (sid !== undefined && sid !== null && String(sid) !== '0') {
+            localStorage.setItem('supermercado_id', String(sid));
+            localStorage.setItem('id_super', String(sid));
+            localStorage.setItem('expiry-eyes-company', JSON.stringify(Number(sid)));
+          } else {
+            localStorage.removeItem('supermercado_id');
+            localStorage.removeItem('id_super');
+            localStorage.removeItem('expiry-eyes-company');
+          }
+          console.debug('[LOGIN] Guardado:', {
+            user_id: localStorage.getItem('user_id'),
+            role: localStorage.getItem('role'),
+            supermercado_id: localStorage.getItem('supermercado_id'),
+            id_super: localStorage.getItem('id_super')
+          });
           await redirectAccordingToRole(userRes.data.role);
         } else {
           alert('No s\'ha pogut obtenir la informació de l\'usuari');
@@ -190,7 +224,8 @@
         alert('Usuari o contrasenya incorrectes');
       }
     } catch (error: any) {
-      alert('Error de connexió o credencials: ' + (error.response?.data?.message || error.message));
+      console.error('Login error:', error?.response?.status, error?.response?.data);
+      alert('Error de connexió o credencials: ' + (error?.response?.data?.message || error.message));
     } finally {
       isLoading.value = false;
     }
@@ -220,8 +255,25 @@
         const meRes = await axios.get('https://xqy3-nsl3-g9gf.n7e.xano.io/api:B0XRi_En/auth/me', {
           headers: { Authorization: `Bearer ${res.data.token || res.data.authToken}` }
         });
-        // Guarda el user_id al localStorage just després d'obtenir meRes
-        localStorage.setItem('user_id', meRes.data.id);
+        localStorage.setItem('user_id', String(meRes.data.id));
+        localStorage.setItem('role', meRes.data.role || '');
+        console.debug('[SIGNUP] /auth/me payload:', meRes.data);
+        const sid2 = extractSuperId(meRes.data);
+        if (sid2 !== undefined && sid2 !== null && String(sid2) !== '0') {
+          localStorage.setItem('supermercado_id', String(sid2));
+          localStorage.setItem('id_super', String(sid2));
+          localStorage.setItem('expiry-eyes-company', JSON.stringify(Number(sid2)));
+        } else {
+          localStorage.removeItem('supermercado_id');
+          localStorage.removeItem('id_super');
+          localStorage.removeItem('expiry-eyes-company');
+        }
+        console.debug('[SIGNUP] Guardado:', {
+          user_id: localStorage.getItem('user_id'),
+          role: localStorage.getItem('role'),
+          supermercado_id: localStorage.getItem('supermercado_id'),
+          id_super: localStorage.getItem('id_super')
+        });
 
         await redirectAccordingToRole(meRes.data.role);
       } else {
@@ -306,6 +358,19 @@
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.data && res.data.email) {
+        localStorage.setItem('user_id', String(res.data.id));
+        localStorage.setItem('role', res.data.role || '');
+        console.debug('[AUTO] /auth/me payload:', res.data);
+        const sid = extractSuperId(res.data);
+        if (sid !== undefined && sid !== null && String(sid) !== '0') {
+          localStorage.setItem('supermercado_id', String(sid));
+          localStorage.setItem('id_super', String(sid));
+          localStorage.setItem('expiry-eyes-company', JSON.stringify(Number(sid)));
+        } else {
+          localStorage.removeItem('supermercado_id');
+          localStorage.removeItem('id_super');
+          localStorage.removeItem('expiry-eyes-company');
+        }
         await redirectAccordingToRole(res.data.role);
       } else {
         localStorage.removeItem('expiry-eyes-token');

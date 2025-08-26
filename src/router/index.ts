@@ -94,6 +94,11 @@ const routes = [
     meta: { requiresAuth: true }
   },
   {
+    path: '/salvar-producto',
+    component: () => import('@/views/SalvarProducto.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/:catchAll(.*)',
     redirect: '/login'
   }
